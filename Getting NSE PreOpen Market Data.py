@@ -15,7 +15,7 @@ def data_download():
         url = 'https://howutrade.in/snapdata/?data=PreOpen_FO_' + str(day) + '&export=csv'
         try:
             df = pd.read_csv(url)
-            file_date = (last_date + timedelta(days=i)).strftime("%d.%m.%y")  # i=0 >> '11.05.18'
+            file_date = (last_date + timedelta(days=i)).strftime("%y.%m.%d")  # i=0 >> '18.05.11'
             df.to_csv("Preopen_FO\\PreOpen_FO_" + file_date + ".csv", index=False)
         except HTTPError:  # On Market holidays you will get an HTTPError
             pass
