@@ -10,7 +10,7 @@ no_of_days = (current_date - last_date).days  # 1163
 
 
 def data_download():
-    for i in range(1150, no_of_days + 1):
+    for i in range(no_of_days + 1):
         day = (last_date + timedelta(days=i)).strftime("%d%b%Y")  # i=0 >> '11May2018'
         url = 'https://howutrade.in/snapdata/?data=PreOpen_FO_' + str(day) + '&export=csv'
         try:
