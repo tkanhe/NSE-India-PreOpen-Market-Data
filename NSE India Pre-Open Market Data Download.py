@@ -14,7 +14,8 @@ def data_download(date_from='11-May-2018'):
     s = requests.Session()
 
     for i in range(no_of_days + 1):
-        r = s.get(f'https://howutrade.in/snapdata/?data=PreOpen_FO_{(last_date + timedelta(days=i)).strftime("%d%b%Y")}&export=csv')
+        url = f'https://howutrade.in/snapdata/?data=PreOpen_FO_{(last_date + timedelta(days=i)).strftime("%d%b%Y")}&export=csv'
+        r = s.get(url)
         if r.status_code == 200:  # On Market holidays you will get 404 status code
             with open(f"df1\\PreOpen_FO_{(last_date + timedelta(days=i)).strftime('%y.%m.%d')}.csv", 'wb') as f:
                 f.write(r.content)
