@@ -1,3 +1,4 @@
+import os
 import requests
 from datetime import datetime, timedelta
 
@@ -12,12 +13,13 @@ def data_download(date_from='11-May-2018'):
     no_of_days = (current_date - last_date).days  # 1297
 
     s = requests.Session()
+    os.makedirs("Preopen_Market_Data", exist_ok=True)
 
     for i in range(no_of_days + 1):
         url = f'https://howutrade.in/snapdata/?data=PreOpen_FO_{(last_date + timedelta(days=i)).strftime("%d%b%Y")}&export=csv'
         r = s.get(url)
         if r.status_code == 200:  # On Market holidays you will get 404 status code
-            with open(f"df1\\PreOpen_FO_{(last_date + timedelta(days=i)).strftime('%y.%m.%d')}.csv", 'wb') as f:
+            with open(f"Preopen_Market_Data\\PreOpen_FO_{(last_date + timedelta(days=i)).strftime('%y.%m.%d')}.csv", 'wb') as f:
                 f.write(r.content)
 
     print('Data downloaded!!!')
