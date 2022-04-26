@@ -11,7 +11,7 @@ last_date = (datetime.now() - timedelta(days=no_of_days)).date()
 urls = (
     (
         f"Preopen_Market_Data\\PreOpen_FO_{(last_date + timedelta(days=i)).strftime('%y.%m.%d')}.csv",
-        f'https://howutrade.in/snapdata/?data=PreOpen_FO_{(last_date + timedelta(days=i)).strftime("%d%b%Y")}&export=csv',
+        f"https://howutrade.in/snapdata/?data=PreOpen_FO_{(last_date + timedelta(days=i)).strftime('%d%b%Y')}&export=csv",
     )
     for i in range(no_of_days + 1)
 )
@@ -26,7 +26,7 @@ def downlaod(url):
             f.write(r.content)
 
 
-with ThreadPoolExecutor(max_workers=20) as executor:
+with ThreadPoolExecutor() as executor:
     executor.map(downlaod, urls)
 
 print("Data downloaded!!!")
